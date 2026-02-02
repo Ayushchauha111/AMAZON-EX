@@ -1,0 +1,97 @@
+* {
+  font-family: Poppins, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.container {
+  background: white;
+  width: 90%;
+  max-width: 420px;
+  padding: 25px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,.2);
+}
+
+.hidden {
+  display: none;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 15px 0;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#photoFrame {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin: 15px 0;
+  animation: fadeZoom 3s ease-in-out infinite;
+}
+
+@keyframes fadeZoom {
+  0% { opacity: 0; transform: scale(1.05); }
+  20% { opacity: 1; transform: scale(1); }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+#photoText {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ff4d6d;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 25px;
+}
+
+#no {
+  position: absolute;
+}
+
+.big {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.final-text {
+  margin-top: 15px;
+  font-size: 16px;
+  color: #ff4d6d;
+  font-weight: bold;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
