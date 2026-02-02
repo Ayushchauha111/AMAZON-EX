@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Neha ❤️ Forever</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<audio id="bgMusic" src="music.mp3" loop></audio>
+<canvas id="fireworks"></canvas>
+
+<!-- LOCK SCREEN -->
+<div class="container" id="lock">
+  <h1>🔐 Only for Neha ❤️</h1>
+  <p>Enter our secret word</p>
+  <input type="password" id="pass" placeholder="Hint: forever" />
+  <button onclick="unlock()">Unlock 💖</button>
+</div>
+
+<!-- PHOTO STORY -->
+<div class="container hidden" id="photos">
+  <h1>Neha ❤️</h1>
+  <p id="photoText"></p>
+  <img id="photoFrame" src="photo1.jpg" />
+  <button onclick="goProposal()">Continue ➡️</button>
+</div>
+
+<!-- PROPOSAL -->
+<div class="container hidden" id="proposal">
+  <h1>Neha ❤️</h1>
+  <p class="big">Will you marry me? 💍</p>
+
+  <div class="buttons">
+    <button id="yes">YES 😭</button>
+    <button id="no">NO 🙃</button>
+  </div>
+
+  <p class="final-text" id="finalText"></p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
