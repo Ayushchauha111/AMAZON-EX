@@ -10,20 +10,21 @@ const yesBtn = document.getElementById("yes");
 const noBtn = document.getElementById("no");
 
 const photoList = [
-  { src: "photo1.jpg", text: "This smile is my peace 🥹" },
-  { src: "photo2.jpg", text: "Strong, calm, beautiful ❤️" },
-  { src: "photo3.jpg", text: "I fall for you every day 😌" },
-  { src: "photo4.jpg", text: "My forever person 💍" },
-  { src: "photo5.jpg", text: "My coffee dates, my home ☕❤️" }
+  { src: "photo1.jpeg", text: "This smile is my peace 🥹" },
+  { src: "photo2.jpeg", text: "Strong, calm, beautiful ❤️" },
+  { src: "photo3.jpeg", text: "I fall for you every day 😌" },
+  { src: "photo4.jpeg", text: "My forever person 💍" },
+  { src: "photo5.jpeg", text: "My coffee dates, my home ☕❤️" }
 ];
 
 let index = 0;
 
 function unlock() {
-  if (document.getElementById("pass").value === "forever") {
+  const pass = document.getElementById("pass").value.toLowerCase();
+  if (pass === "forever") {
     lock.classList.add("hidden");
     photos.classList.remove("hidden");
-    music.play();
+    music.play().catch(e => console.log("Music wait for interaction"));
     startPhotos();
   } else {
     alert("Wrong password 😌");
@@ -31,11 +32,16 @@ function unlock() {
 }
 
 function startPhotos() {
+  photoText.innerText = photoList[0].text;
   setInterval(() => {
-    photoFrame.src = photoList[index].src;
-    photoText.innerText = photoList[index].text;
     index = (index + 1) % photoList.length;
-  }, 3000);
+    photoFrame.style.opacity = 0;
+    setTimeout(() => {
+      photoFrame.src = photoList[index].src;
+      photoText.innerText = photoList[index].text;
+      photoFrame.style.opacity = 1;
+    }, 500);
+  }, 3500);
 }
 
 function goProposal() {
@@ -43,39 +49,65 @@ function goProposal() {
   proposal.classList.remove("hidden");
 }
 
-// NO button escapes 😈
-noBtn.addEventListener("mouseover", () => {
-  noBtn.style.left = Math.random() * 70 + "%";
-  noBtn.style.top = Math.random() * 70 + "%";
-});
+// NO button escapes logic
+noBtn.addEventListener("mouseover", moveNoButton);
+noBtn.addEventListener("touchstart", moveNoButton); // For mobile
 
-// YES clicked ❤️
+function moveNoButton() {
+  const container = document.querySelector(".buttons");
+  const maxX = container.clientWidth - noBtn.clientWidth;
+  const maxY = container.clientHeight - noBtn.clientHeight;
+
+  const randomX = Math.max(0, Math.floor(Math.random() * maxX));
+  const randomY = Math.max(0, Math.floor(Math.random() * maxY));
+
+  noBtn.style.left = randomX + "px";
+  noBtn.style.top = randomY + "px";
+}
+
+// YES clicked
 yesBtn.onclick = () => {
   launchFireworks();
   document.getElementById("finalText").innerText =
     "Neha said YES 😭💍 Forever starts now ❤️";
+  noBtn.classList.add("hidden");
+  yesBtn.style.display = "none";
 };
 
-// FIREWORKS 🎆
+// FIREWORKS logic
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+let particles = [];
+
 function launchFireworks() {
   setInterval(() => {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    for (let i = 0; i < 60; i++) {
-      ctx.beginPath();
-      ctx.arc(
-        Math.random() * canvas.width,
-        Math.random() * canvas.height,
-        2,
-        0,
-        Math.PI * 2
-      );
-      ctx.fillStyle = `hsl(${Math.random()*360},100%,50%)`;
-      ctx.fill();
+    for (let i = 0; i < 5; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: canvas.height,
+            vx: Math.random() * 4 - 2,
+            vy: Math.random() * -10 - 5,
+            color: `hsl(${Math.random() * 360}, 100%, 50%)`
+        });
     }
-  }, 200);
+  }, 100);
+  animate();
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.1; // gravity
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+        if (p.y > canvas.height) particles.splice(i, 1);
+    });
+    requestAnimationFrame(animate);
 }
