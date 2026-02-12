@@ -1,5 +1,5 @@
 * {
-  font-family: Poppins, sans-serif;
+  font-family: 'Poppins', sans-serif;
   box-sizing: border-box;
 }
 
@@ -10,20 +10,22 @@ body {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  margin: 0;
 }
 
 .container {
   background: white;
   width: 90%;
-  max-width: 420px;
-  padding: 25px;
-  border-radius: 16px;
+  max-width: 400px;
+  padding: 30px;
+  border-radius: 20px;
   text-align: center;
   box-shadow: 0 15px 40px rgba(0,0,0,.2);
+  z-index: 10;
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 input {
@@ -31,7 +33,8 @@ input {
   padding: 12px;
   margin: 15px 0;
   border-radius: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
+  outline: none;
 }
 
 button {
@@ -43,48 +46,57 @@ button {
   border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
+  transition: transform 0.2s;
+}
+
+button:active {
+  transform: scale(0.95);
 }
 
 #photoFrame {
   width: 100%;
-  height: 320px;
+  height: 300px;
   object-fit: cover;
-  border-radius: 14px;
+  border-radius: 15px;
   margin: 15px 0;
-  animation: fadeZoom 3s ease-in-out infinite;
 }
 
-@keyframes fadeZoom {
-  0% { opacity: 0; transform: scale(1.05); }
-  20% { opacity: 1; transform: scale(1); }
-  80% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-#photoText {
-  font-size: 15px;
-  font-weight: 600;
-  color: #ff4d6d;
+.image-wrapper {
+    min-height: 320px;
 }
 
 .buttons {
   display: flex;
-  justify-content: space-around;
-  margin-top: 25px;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+  position: relative;
+  min-height: 100px;
 }
 
 #no {
-  position: absolute;
+  position: absolute; /* Keeps it movable */
+  width: auto;
+  padding: 10px 25px;
+  background: #666;
+  white-space: nowrap;
+}
+
+#yes {
+    width: auto;
+    padding: 10px 25px;
 }
 
 .big {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
+  color: #333;
 }
 
 .final-text {
-  margin-top: 15px;
-  font-size: 16px;
+  margin-top: 20px;
+  font-size: 18px;
   color: #ff4d6d;
   font-weight: bold;
 }
@@ -93,5 +105,8 @@ canvas {
   position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
+  z-index: 1;
 }
