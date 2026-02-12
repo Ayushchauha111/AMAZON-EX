@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Neha ❤️ Forever</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -10,7 +11,6 @@
 <audio id="bgMusic" src="music.mp3" loop></audio>
 <canvas id="fireworks"></canvas>
 
-<!-- LOCK SCREEN -->
 <div class="container" id="lock">
   <h1>🔐 Only for Neha ❤️</h1>
   <p>Enter our secret word</p>
@@ -18,15 +18,15 @@
   <button onclick="unlock()">Unlock 💖</button>
 </div>
 
-<!-- PHOTO STORY -->
 <div class="container hidden" id="photos">
   <h1>Neha ❤️</h1>
   <p id="photoText"></p>
-  <img id="photoFrame" src="photo1.jpg" />
+  <div class="image-wrapper">
+    <img id="photoFrame" src="photo1.jpeg" />
+  </div>
   <button onclick="goProposal()">Continue ➡️</button>
 </div>
 
-<!-- PROPOSAL -->
 <div class="container hidden" id="proposal">
   <h1>Neha ❤️</h1>
   <p class="big">Will you marry me? 💍</p>
